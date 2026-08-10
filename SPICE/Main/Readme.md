@@ -1,6 +1,6 @@
-~~~ HOW TO USE ~~~
+### HOW TO USE ###
 
 cd /dir/ && ngspice -b input.spice -o out.log
 
-~~~ INSTALL ~~~
+### INSTALL ###
 pip install matplotlib pandas numpy openpyxl
