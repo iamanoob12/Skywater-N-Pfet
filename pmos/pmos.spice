@@ -1,0 +1,29 @@
+* Sky130 PMOS Id-Vgs and Transconductance (gm) characterization
+
+* Dimensions
+.param W=5 L=0.30
+
+Vds Vd 0 DC -0.4
+Vgs Vg 0 DC -1.35
+
+* Device under test: drain gate source bulk
+XMP Vd Vg 0 0 sky130_fd_pr__pfet_01v8 w=W l=L nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0
++ mult=1
+
+* Sky130 model library and corner
+.lib "/usr/local/share/pdk/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+
+.save all @m.xmp.msky130_fd_pr__pfet_01v8[vth]
+.save all @m.xmp.msky130_fd_pr__pfet_01v8[gm]
+.save all @m.xmp.msky130_fd_pr__pfet_01v8[gds]
+
+
+.control 
+    op
+    save all @m.xmp.msky130_fd_pr__pfet_01v8[vth]
+    save all @m.xmp.msky130_fd_pr__pfet_01v8[gm]
+    save all @m.xmp.msky130_fd_pr__pfet_01v8[gds]
+    print all
+.endc
+
+.end

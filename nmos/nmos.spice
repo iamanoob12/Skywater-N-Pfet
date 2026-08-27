@@ -1,0 +1,28 @@
+***Nmos Vgs 1.1***
+
+.param W=5, L=0.15
+
+.lib "/usr/local/share/pdk/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+
+* Voltage sources
+Vgs Vgs 0 DC 1.1
+Vds Vdd 0 DC 0.4
+Xfet1 Vdd Vgs 0 0 MY_NFET
+
+.subckt MY_NFET Vd Vg Vs Vb
+   XMN Vd Vg Vs Vb sky130_fd_pr__nfet_01v8 w=W l=L nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0 mult=1 
+.ends MY_NFET
+
+.save all @m.xfet1.xmn.msky130_fd_pr__nfet_01v8[gm] @m.xfet1.xmn.msky130_fd_pr__nfet_01v8[gds]
+    
+
+.control 
+    destroy all
+    op
+    save @m.xfet1.xmn.msky130_fd_pr__nfet_01v8[gm] 
+    save @m.xfet1.xmn.msky130_fd_pr__nfet_01v8[gds]
+    print all
+    
+.endc
+
+.end
