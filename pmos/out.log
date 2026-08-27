@@ -1,0 +1,25 @@
+
+Note: Compatibility modes selected: hs a
+
+Warning: m=xx on .subckt line will override multiplier m hierarchy!
+
+
+Circuit: * sky130 pmos id-vgs and transconductance (gm) characterization
+
+option SCALE: Scale is set to 1e-06 for instance and model parameters
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1
+@m.xmp.msky130_fd_pr__pfet_01v8[gds] = 4.917166e-05
+@m.xmp.msky130_fd_pr__pfet_01v8[gm] = 3.711851e-04
+@m.xmp.msky130_fd_pr__pfet_01v8[vth] = 9.428848e-01
+m.xmp.msky130_fd_pr__pfet_01v8#body = -5.03887e-12
+m.xmp.msky130_fd_pr__pfet_01v8#dbody = -1.25970e-11
+m.xmp.msky130_fd_pr__pfet_01v8#sbody = -2.51958e-12
+vd = -4.00000e-01
+vds#branch = 9.045101e-05
+vg = -1.35000e+00
+vgs#branch = 0.000000e+00
+Note: Simulation executed from .control section 
