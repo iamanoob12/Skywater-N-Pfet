@@ -13,7 +13,7 @@ Vdd Vdd 0 DC 1.6
 Vb1 Vb1 0 DC 0.25
 Vb2 Vb2 0 DC -0.15
 Vb3 Vb3 0 DC 1.5
-Vin Vin 0 DC 1.1
+Vin Vin 0 DC 1.1 AC 1
 
 * Cascode Transistor Instantiations
 Xpfet1 Vdd Vb1 N1 Vdd MY_PFET W_val='W_p' L_val='L_p' m='scale_p'
@@ -23,17 +23,20 @@ Xnfet2 N2 Vin 0 0 MY_NFET W_val='W_n' L_val='L_n' m='scale_n'
 
 * Parameterized Subcircuits
 .subckt MY_NFET Vd Vg Vs Vb W_val=5 L_val=0.15
-   XMN Vd Vg Vs Vb sky130_fd_pr__nfet_01v8 w='W_val' l='L_val' nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0 mult=1 
+   XMN Vd Vg Vs Vb sky130_fd_pr__nfet_01v8 w='W_val' l='L_val' nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0 mult=1
 .ends MY_NFET
 
-.subckt MY_PFET Vd Vg Vs Vb W_val=5 L_val=0.30
-   XMP Vd Vg Vs Vb sky130_fd_pr__pfet_01v8 w='W_val' l='L_val' nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0 mult=1
+.subckt MY_PFET Vs Vg Vd Vb W_val=5 L_val=0.30
+   XMP Vd Vg Vs Vb sky130_fd_pr__pfet_01v8 w='W_val' l='L_val' nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0 mult=1 
 .ends MY_PFET
 
 .control
-  save v(N1) v(N2) v(Vout)
-  op
-  print v(N1) v(N2) v(Vout)
+   options KLU
+
+   save v(N1) v(N2) v(Vout)
+   op
+   pz Vin 0 Vout 0 vol pz
+   print v(N1) v(N2) v(Vout)
 .endc
 
 .end
