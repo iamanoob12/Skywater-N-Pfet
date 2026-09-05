@@ -1,0 +1,41 @@
+
+Note: Compatibility modes selected: hs a
+
+Warning: m=xx on .subckt line will override multiplier m hierarchy!
+
+
+Circuit: * parasitic capacitance extraction
+
+option SCALE: Scale is set to 1e-06 for instance and model parameters
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1
+cdbn_ff = 2.814327e-01
+cdbp_ff = 8.914711e-01
+cdsn_ff = 1.544228e+00
+cdsp_ff = 3.804368e+00
+cgbn_ff = 8.784246e-01
+cgbp_ff = 9.473896e-01
+cgdn_ff = 6.564864e-02
+cgdp_ff = 1.757932e-01
+cggn_ff = 4.173529e+00
+cggp_ff = 9.255511e+00
+cgsn_ff = 3.229456e+00
+cgsp_ff = 8.132329e+00
+m.xnfet1.xmn.msky130_fd_pr__nfet_01v8#body = 5.063450e-12
+m.xnfet1.xmn.msky130_fd_pr__nfet_01v8#dbody = 1.265769e-11
+m.xnfet1.xmn.msky130_fd_pr__nfet_01v8#sbody = 2.532654e-12
+m.xpfet1.xmp.msky130_fd_pr__pfet_01v8#body = -5.03887e-12
+m.xpfet1.xmp.msky130_fd_pr__pfet_01v8#dbody = -1.25970e-11
+m.xpfet1.xmp.msky130_fd_pr__pfet_01v8#sbody = -2.51958e-12
+vdsn = 4.000000e-01
+vdsn#branch = -5.56182e-04
+vdsp = -4.00000e-01
+vdsp#branch = 9.045101e-05
+vgsn = 1.100000e+00
+vgsn#branch = 0.000000e+00
+vgsp = -1.35000e+00
+vgsp#branch = 0.000000e+00
+Note: Simulation executed from .control section 

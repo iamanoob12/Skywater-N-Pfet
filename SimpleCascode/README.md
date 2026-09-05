@@ -65,6 +65,24 @@ $$A_v \approx -g_{m1}R_{out}$$
 
 The first-order hand calculation predicts an output resistance of roughly 4.2 kΩ and a gain near 29 dB.
 
+For the dominant-pole frequency, it is estimated as:
+
+$$f \approx \frac{1}{2\pi \cdot (R_{p} \cdot C_{tot})}$$
+
+From approximation, we have:
+
+$$R_{p} \approx 8700 \, \Omega$$
+
+and
+
+$$C_{tot} = C_{dg2} + C_{ds} \cdot \frac{1}{\left(1 - \frac{1}{A}\right)}$$
+
+with
+
+$$A = \frac{(1 + g_{m2}r_{02})}{(1 + \frac{r_{02}}{R_{p}})}$$
+
+The result is approximately 2.23 GHz
+
 ## Simulation results
 
 ### DC operating point
@@ -79,10 +97,9 @@ The operating-point simulation produces the expected 400 mV steps through the st
 
 ### AC response
 
-- Low-frequency gain: approximately **27.84 dB**
+- Low-frequency gain: approximately **30 dB**
 - Output phase: approximately **180°**
 - Extracted output -3 dB frequency: approximately **746 MHz**
-- Hand-estimated dominant-pole frequency: approximately **2.23 GHz**
 
 The difference between the hand estimate and the extracted pole is expected from the simplified capacitance and gain assumptions used in the first-order model.
 
