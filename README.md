@@ -15,7 +15,6 @@ This project demonstrates:
 [SkyWater 130nm](https://skywater-pdk.readthedocs.io/) is an open-source Process Design Kit providing:
 - NMOS and PMOS device models (`sky130_fd_pr__nfet_01v8`, `sky130_fd_pr__pfet_01v8`)
 - Standard cell libraries
-- Design rules and layouts
 
 Installed at: `/usr/local/share/pdk`
 
