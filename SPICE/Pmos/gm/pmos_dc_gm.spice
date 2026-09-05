@@ -1,0 +1,52 @@
+* Sky130 PMOS Id-Vgs and Transconductance (gm) characterization
+
+.option savecurrents
+.temp 27
+
+* Dimensions
+.param W=5
+.param L=0.15
+
+* Bias sources
+VDS d 0 0
+VSG g 0 0
+
+* Device under test: drain gate source bulk
+XMP d g 0 0 sky130_fd_pr__pfet_01v8 w=W l=L nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0
++ mult=1
+
+* Sky130 model library and corner
+.lib "/mnt/d/Linux/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+
+.control
+set noaskquit
+set wr_vecnames
+set wr_singlescale
+
+set prefix = "pmos_gm_vgs_vds_"
+set ext = ".csv"
+
+* Sweep VDS across negative values (-0.05V = Linear, -1.80V = Saturation)
+foreach vds -0.05 -0.10 -0.20 -0.40 -0.60 -0.80 -1.00 -1.20 -1.50 -1.80
+  alter vds $vds
+  
+  * Direct negative sweep on Gate bias: 0V to -1.8V (step = -0.001V)
+  dc VSG 0 -1.8 -0.001
+
+  * Invert branch current to make ID negative
+  let id = -vds#branch
+  let gm = deriv(id)
+
+  set outfile = {$prefix}{$vds}{$ext}
+
+  * Write 3-column output: VGS (negative), ID (negative), GM (positive)
+  wrdata $outfile id gm
+
+  * Format space delimiters into commas for clean CSV
+  shell sed -i 's/[[:space:]]\+/,/g' $outfile
+end
+
+quit
+.endc
+
+.end

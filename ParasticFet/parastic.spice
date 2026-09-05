@@ -1,0 +1,45 @@
+* Parasitic capacitance extraction
+
+.param scale_n = '2m / 5.561820e-4'
+.param scale_p = '2m / 9.045101e-5'
+
+.lib "/usr/local/share/pdk/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+
+.subckt df_nfet Vd Vg Vs Vb W_val=5 L_val=0.15
+   XMN Vd Vg Vs Vb sky130_fd_pr__nfet_01v8 w='W_val' l='L_val' nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0 mult=1
+.ends df_nfet
+
+.subckt df_pfet Vs Vg Vd Vb W_val=5 L_val=0.30
+   XMP Vd Vg Vs Vb sky130_fd_pr__pfet_01v8 w='W_val' l='L_val' nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0 mult=1
+.ends df_pfet
+
+Vdsp Vdsp 0 DC -0.4
+Vgsp Vgsp 0 DC -1.35
+
+Vdsn Vdsn 0 DC 0.4
+Vgsn Vgsn 0 DC 1.1
+
+Xnfet1 Vdsn Vgsn 0 0 df_nfet
+Xpfet1 0 Vgsp Vdsp 0 df_pfet
+
+.control
+  op
+
+  let cgsn_fF = abs(@m.xnfet1.xmn.msky130_fd_pr__nfet_01v8[cgs]) * 1e15
+  let cgdn_fF = abs(@m.xnfet1.xmn.msky130_fd_pr__nfet_01v8[cgd]) * 1e15
+  let cggn_fF = abs(@m.xnfet1.xmn.msky130_fd_pr__nfet_01v8[cgg]) * 1e15
+  let cdsn_fF = abs(@m.xnfet1.xmn.msky130_fd_pr__nfet_01v8[cds]) * 1e15
+  let cgbn_fF = abs(@m.xnfet1.xmn.msky130_fd_pr__nfet_01v8[cgb]) * 1e15
+  let cdbn_fF = abs(@m.xnfet1.xmn.msky130_fd_pr__nfet_01v8[cdb]) * 1e15
+
+  let cgsp_fF = abs(@m.xpfet1.xmp.msky130_fd_pr__pfet_01v8[cgs]) * 1e15
+  let cgdp_fF = abs(@m.xpfet1.xmp.msky130_fd_pr__pfet_01v8[cgd]) * 1e15
+  let cggp_fF = abs(@m.xpfet1.xmp.msky130_fd_pr__pfet_01v8[cgg]) * 1e15
+  let cdsp_fF = abs(@m.xpfet1.xmp.msky130_fd_pr__pfet_01v8[cds]) * 1e15
+  let cgbp_fF = abs(@m.xpfet1.xmp.msky130_fd_pr__pfet_01v8[cgb]) * 1e15
+  let cdbp_fF = abs(@m.xpfet1.xmp.msky130_fd_pr__pfet_01v8[cdb]) * 1e15
+
+  print all
+.endc
+
+.end

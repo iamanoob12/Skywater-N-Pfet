@@ -1,0 +1,7 @@
+--- Fitted poles (rad/s | Hz) ---
+  s = -2.030139e+11+6.408604e+10j   ->  f =  1.019961e+10 Hz, sigma = -2.030139e+11 rad/s (complex pair)
+  s = -2.760541e+10-1.591520e+09j   ->  f =  2.532983e+08 Hz, sigma = -2.760541e+10 rad/s (complex pair)
+  s = -4.801261e+09+1.851406e+07j   ->  f =  2.946604e+06 Hz, sigma = -4.801261e+09 rad/s (complex pair)
+
+--- Fitted zeros (rad/s | Hz) ---
+  s = -4.899932e+10+6.310655e+08j   ->  f =  1.004372e+08 Hz, sigma = -4.899932e+10 rad/s

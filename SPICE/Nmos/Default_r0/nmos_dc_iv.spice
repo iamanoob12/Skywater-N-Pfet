@@ -1,0 +1,37 @@
+* Sky130 NMOS Id-Vds characterization (1.8V core NMOS)
+
+.option savecurrents
+.temp 27
+
+* Dimensions
+.param W=5
+.param L=0.15
+
+* Bias sources
+VDS d 0 0
+VGS g 0 0
+
+* Device under test: drain gate source bulk
+XMN d g 0 0 sky130_fd_pr__nfet_01v8 w=W l=L nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0
++ mult=1
+
+* Sky130 model library and corner
+.lib "/mnt/d/Linux/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+
+.control
+set noaskquit
+
+set prefix = "nmos_id_vds_vgs_"
+set ext = ".csv"
+
+foreach vgs 0.10 0.20 0.30 0.40 0.50 0.60 0.75 0.90 1.20 1.50 1.80
+  alter vgs $vgs
+  dc VDS 0 1.8 0.001
+  set outfile = {$prefix}{$vgs}{$ext}
+  wrdata $outfile -i(VDS)
+end
+
+quit
+.endc
+
+.end
