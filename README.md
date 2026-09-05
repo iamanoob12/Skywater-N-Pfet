@@ -97,17 +97,8 @@ Each transistor is characterized by:
 - **$V_{TH}$** (threshold voltage): turn-on voltage
 - **$C_{gs}$, $C_{gd}$, $C_{sb}$**: parasitic capacitances
 
-### Small-Signal Analysis
-Transistor replaced by equivalent AC circuit:
-- Voltage-controlled current source: $g_m v_{gs}$
-- Output resistance: $r_o$
-- Gate capacitance: $C_{gs}$
-
-### Dominant Pole
-The low-frequency response is limited by:
-$$f_p = \frac{1}{2\pi R_{out} C_{load}}$$
-
-where $R_{out}$ is the circuit output resistance and $C_{load}$ is the total load capacitance.
+### Small-Signal Analysis and Frequency Respond
+See more in SimpleCascode
 
 ## Examples
 
