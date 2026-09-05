@@ -92,7 +92,7 @@ python SPICE/Nmos/Default_r0/fix_plot.py
 ### Device Parameters
 Each transistor is characterized by:
 - **$g_m$** (transconductance): small-signal gain
-- **$r_o$** (output resistance): 1/$g_{ds}$
+- **$r_o$** (output resistance): $1/g_{ds}$
 - **$V_{TH}$** (threshold voltage): turn-on voltage
 - **$C_{gs}$, $C_{gd}$, $C_{sb}$**: parasitic capacitances
 
