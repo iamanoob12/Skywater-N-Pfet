@@ -1,0 +1,31 @@
+* Test
+
+.param W=5, L=0.15
+.param scale = 1m/1.5407892900e-04
+
+* Include PDK model library
+.lib "/usr/local/share/pdk/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+
+Vin Vin 0 DC 0.9
+Vdd Vdd 0 DC 1.8
+Ib Vdd Vd DC 1m
+
+Xfet1 Vd Vin 0 0 MY_NFET m='scale'
+
+.subckt MY_NFET Vd Vg Vs Vb
+   XMN Vd Vg Vs Vb sky130_fd_pr__nfet_01v8 w=W l=L nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0 mult=1 
+.ends MY_NFET
+
+* 1. Save internal parameters BEFORE the control block / run command
+.save all @m.xfet1.xmn.msky130_fd_pr__nfet_01v8[gm] @m.xfet1.xmn.msky130_fd_pr__nfet_01v8[gds]
+.save all @m.xfet1.xmn.msky130_fd_pr__nfet_01v8[vth]
+.control
+  op
+  let gm_val  = @m.xfet1.xmn.msky130_fd_pr__nfet_01v8[gm]
+  let gds_val = @m.xfet1.xmn.msky130_fd_pr__nfet_01v8[gds]
+  let vth_val = @m.xfet1.xmn.msky130_fd_pr__nfet_01v8[vth]
+  let ro_val  = 1 / gds_val
+  print all
+.endc
+
+.end

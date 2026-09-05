@@ -1,0 +1,25 @@
+{
+  "SPICE circuit template": {
+    "scope": "spice",
+    "prefix": "spice-template",
+    "body": [
+      "*** Name ***",
+      "",
+      "*#destroy all",
+      "*#run",
+      "*#print all",
+      "",
+      ".lib \"/usr/local/share/pdk/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice\" tt",
+      "",
+      ".subckt df_nfet Vd Vg Vs Vb W_val=5 L_val=0.15",
+      "   XMN Vd Vg Vs Vb sky130_fd_pr__nfet_01v8 w='W_val' l='L_val' nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0 mult=1",
+      "ends df_nfet",
+      "",
+      ".subckt df_pfet Vd Vg Vs Vb W_val=5 L_val=0.15",
+      "   XMP Vd Vg Vs Vb sky130_fd_pr__pfet_01v8 w='W_val' l='L_val' nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0 mult=1",
+      "ends df_pfet",
+      "$0"
+    ],
+    "description": "Starter template for an ngspice .spice file"
+  }
+}

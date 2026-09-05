@@ -1,0 +1,35 @@
+* Test - Fixed Parallel Scaling using m=
+
+.param W=5, L=0.15
+.param scale = 1m/1.5407892900e-04
+
+* Include PDK model library
+.lib "/usr/local/share/pdk/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+
+Vin Vin 0 DC 0.9
+Vdd Vdd 0 DC 1.8
+
+Vmeas1 Vdd Vd1 DC 0
+Vmeas2 Vdd Vd2 DC 0
+
+* 1. Apply m='scale' on the subcircuit instance line instead of inside the PDK
+Xfet1 Vd1 Vin 0 0 MY_NFET
+Xfet2 Vd2 Vin 0 0 MY_NFET m='scale'
+
+.subckt MY_NFET Vd Vg Vs Vb
+   XMN Vd Vg Vs Vb sky130_fd_pr__nfet_01v8 w=5 l=0.15 nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0
+.ends MY_NFET
+
+.dc Vdd 0 1.8 0.01
+
+.control
+  run
+  let scale = 1m / 1.5407892900e-04
+  let id1 = i(Vmeas1)
+  let id2_scaled = i(Vmeas2) / scale
+  
+  * id1 and id2_scaled will now overlay with 100% precision
+  plot id1 id2_scaled title "Exact Current Comparison (m= Instance Scaling)" xlabel "Vds (V)" ylabel "Current (A)"
+.endc
+
+.end
